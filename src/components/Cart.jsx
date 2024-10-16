@@ -49,8 +49,8 @@ const Cart = () => {
                         <div className="cart-info">
                             <p>{item.title}</p>
                             <p>Price: ${item.price}</p>
-                            <p>Quantity: {item.quantity}</p>
                             <div className="quantity-controls">
+                            <p>Quantity: {item.quantity}</p>
                                 <button className='plus'
                                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                 >

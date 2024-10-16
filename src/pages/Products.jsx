@@ -1,21 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '/src/components/Cartcontext.jsx';
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from 'sweetalert2'; 
 
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
-    const { cart, addToCart } = useContext(CartContext); // Access cart from context
+    const { cart, addToCart } = useContext(CartContext);
 
-    // Loading animation delay
+   
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 500);
         return () => clearTimeout(timer);
     }, []);
 
-    // Fetch products from API
+    
     useEffect(() => {
         const fetchProducts = async () => {
             const response = await fetch('https://fakestoreapi.com/products');
@@ -26,12 +26,11 @@ const Products = () => {
         fetchProducts();
     }, []);
 
-    // Handle Add to Cart with SweetAlert
+ 
     const handleAddToCart = (product) => {
         const isAlreadyInCart = cart.some((item) => item.id === product.id); 
 
         if (isAlreadyInCart) {
-            // Show alert if already added
             Swal.fire({
                 title: 'Already in Cart!',
                 text: `${product.title} is already in your cart.`,
@@ -41,7 +40,7 @@ const Products = () => {
                 showConfirmButton: false,
             });
         } else {
-            addToCart(product); // Add to cart
+            addToCart(product); 
 
             Swal.fire({
                 title: 'Added to Cart!',
@@ -54,12 +53,10 @@ const Products = () => {
         }
     };
 
-    // Filter products based on search input
     const filteredProducts = products.filter((product) =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Loading animation
     if (loading) {
         return (
             <div className="loading">
